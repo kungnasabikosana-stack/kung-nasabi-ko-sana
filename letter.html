@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter - Kung Nasabi Ko Sana</title>
+    <link rel="stylesheet" href="letter-style.css">
+</head>
+<body class="letter-page">
+    <!-- Background Effects -->
+    <div class="background-layer">
+        <div class="letter-particles" id="letterParticles"></div>
+        <div class="vignette"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="letter-container">
+        <!-- Header with Navigation -->
+        <header class="letter-header">
+            <a href="index.html" class="back-button">
+                <span class="back-arrow">←</span>
+                <span class="back-text">Back to Home</span>
+            </a>
+        </header>
+
+        <!-- Letter Content -->
+        <article class="letter-content" id="letterContent">
+            <!-- Letter will be populated here via JavaScript -->
+        </article>
+
+        <!-- Letter Footer -->
+        <footer class="letter-footer">
+            <div class="footer-actions">
+                <button class="action-btn share-btn" onclick="shareLetter()">
+                    <span class="btn-icon">♡</span>
+                    <span class="btn-label">Cherish</span>
+                </button>
+                <button class="action-btn print-btn" onclick="printLetter()">
+                    <span class="btn-icon">⤓</span>
+                    <span class="btn-label">Save</span>
+                </button>
+            </div>
+            <p class="footer-text">Some words arrive late, but still find their way home.</p>
+        </footer>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="modal hidden">
+        <div class="modal-content share-modal">
+            <div class="modal-close" onclick="closeShareModal()">&times;</div>
+            <h2>Share This Memory</h2>
+            <p class="modal-subtitle">Pass this letter forward to someone who needs it</p>
+            
+            <div class="share-options">
+                <button class="share-option" onclick="copyLetterLink()">
+                    <span class="share-icon">🔗</span>
+                    <span>Copy Link</span>
+                </button>
+                <button class="share-option" onclick="copyLetterText()">
+                    <span class="share-icon">📋</span>
+                    <span>Copy Text</span>
+                </button>
+                <button class="share-option" onclick="shareViaEmail()">
+                    <span class="share-icon">✉️</span>
+                    <span>Email</span>
+                </button>
+            </div>
+
+            <p class="copy-status hidden" id="copyStatus">Copied to clipboard!</p>
+        </div>
+    </div>
+
+    <script src="letter-script.js"></script>
+</body>
+</html>
