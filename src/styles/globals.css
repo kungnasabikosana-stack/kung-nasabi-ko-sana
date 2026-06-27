@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(135deg, #FFFEF7 0%, #FBF8F3 50%, #F5F1E8 100%);
+  background-attachment: fixed;
+  background-image: 
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/><feColorMatrix in="noise" type="saturate" values="0.3"/></filter><rect width="100" height="100" fill="%23FBF8F3"/><rect width="100" height="100" fill="%23FBF8F3" filter="url(%23noise)" opacity="0.4"/></svg>'),
+    linear-gradient(135deg, #FFFEF7 0%, #FBF8F3 50%, #F5F1E8 100%);
+  background-size: 100px 100px, cover;
+  color: #5E728A;
+  font-family: 'Cormorant Garamond', serif;
+  line-height: 1.8;
+}
+
+/* Vintage Text Styles */
+.serif-title {
+  @apply font-serif font-bold tracking-wide;
+}
+
+.serif-heading {
+  @apply font-serif font-semibold text-vintage-faded-navy;
+}
+
+.handwritten {
+  @apply font-handwrite text-lg text-vintage-faded-navy;
+}
+
+.cursive-text {
+  @apply font-cursive text-2xl text-vintage-dusty-blue;
+}
+
+.elegant-text {
+  @apply font-elegant text-vintage-faded-navy;
+}
+
+/* Paper Effect */
+.paper-bg {
+  background-color: #FFFEF7;
+  background-image: 
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/><feColorMatrix in="noise" type="saturate" values="0.3"/></filter><rect width="100" height="100" fill="%23FFFEF7"/><rect width="100" height="100" fill="%23FFFEF7" filter="url(%23noise)" opacity="0.3"/></svg>');
+  position: relative;
+}
+
+.paper-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(90deg, transparent 24%, rgba(200, 150, 100, 0.05) 25%, rgba(200, 150, 100, 0.05) 26%, transparent 27%, transparent 74%, rgba(200, 150, 100, 0.05) 75%, rgba(200, 150, 100, 0.05) 76%, transparent 77%, transparent),
+    linear-gradient(0deg, transparent 24%, rgba(200, 150, 100, 0.05) 25%, rgba(200, 150, 100, 0.05) 26%, transparent 27%, transparent 74%, rgba(200, 150, 100, 0.05) 75%, rgba(200, 150, 100, 0.05) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+/* Vintage Button Styles */
+.btn-vintage {
+  @apply px-8 py-3 rounded-none border-2 border-vintage-dusty-blue text-vintage-faded-navy font-elegant transition-all duration-300 hover:bg-vintage-dusty-blue hover:text-ivory hover:shadow-vintage;
+}
+
+.btn-vintage-primary {
+  @apply px-8 py-3 rounded-none bg-vintage-dusty-blue text-ivory font-elegant transition-all duration-300 hover:bg-vintage-faded-navy hover:shadow-vintage;
+}
+
+/* Input Styles */
+.input-vintage {
+  @apply w-full px-4 py-3 bg-ivory border-b-2 border-vintage-dusty-blue focus:outline-none focus:border-vintage-faded-navy transition-colors font-elegant text-vintage-faded-navy placeholder-vintage-blue-gray placeholder-opacity-60;
+}
+
+/* Envelope Styles */
+.envelope {
+  perspective: 1000px;
+}
+
+.envelope-front {
+  @apply relative w-full h-full bg-cream border-2 border-vintage-silver rounded-sm shadow-envelope;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-out;
+}
+
+.envelope-front.open {
+  transform: rotateX(90deg);
+}
+
+.envelope-flap {
+  @apply absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-ivory to-cream border-b border-vintage-silver;
+  transform-origin: top;
+  transition: transform 0.5s ease-out;
+}
+
+.envelope-flap.open {
+  transform: rotateX(-90deg);
+}
+
+/* Wax Seal */
+.wax-seal {
+  @apply absolute rounded-full shadow-lg transition-all duration-300;
+  background: radial-gradient(circle at 30% 30%, #D4A574, #8B6F47);
+  width: 60px;
+  height: 60px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wax-seal.broken {
+  animation: sealBreak 1.5s ease-out forwards;
+}
+
+/* Letter Paper */
+.letter-paper {
+  @apply relative bg-cream paper-bg rounded-sm shadow-letter p-12 text-center;
+}
+
+.letter-paper .deckled-edge {
+  position: relative;
+  border-radius: 0;
+  box-shadow: inset 0 0 5px rgba(200, 150, 100, 0.3);
+}
+
+/* Flower Petals */
+.flower-petal {
+  @apply absolute opacity-70 pointer-events-none;
+  animation: drift 8s ease-in-out infinite;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F1E8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8FAEC9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5E728A;
+}
+
+/* Smooth Transitions */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: white;
+  }
+  
+  .no-print {
+    display: none;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .letter-paper {
+    @apply p-6;
+  }
+  
+  .serif-title {
+    @apply text-3xl;
+  }
+}
