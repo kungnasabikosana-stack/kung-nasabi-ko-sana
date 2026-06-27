@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kung Nasabi Ko Sana - Letters You Wish You Said</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="background-layer">
+        <div class="floating-elements" id="floatingElements"></div>
+        <div class="vignette"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <a href="index.html" class="header-logo">← Back to Home</a>
+                <h1 class="title">Kung Nasabi Ko Sana</h1>
+                <p class="subtitle">Letters You Wish You Said</p>
+                <p class="tagline">Sometimes the most important words arrive too late. Here are the letters that should have been written.</p>
+            </div>
+        </header>
+
+        <!-- Filter Section -->
+        <section class="filters-section">
+            <div class="filters-container">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-box" 
+                    placeholder="Search letters by title or sender..."
+                    autocomplete="off"
+                >
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Letters</button>
+                    <button class="filter-btn" data-filter="love">Love</button>
+                    <button class="filter-btn" data-filter="family">Family</button>
+                    <button class="filter-btn" data-filter="friendship">Friendship</button>
+                    <button class="filter-btn" data-filter="regret">Regret</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Letters Grid -->
+        <section class="letters-section">
+            <div class="letters-grid" id="lettersGrid">
+                <!-- Letters will be loaded here -->
+            </div>
+            <div class="no-results hidden" id="noResults">
+                <p>No letters found matching your search.</p>
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <div class="loading" id="loadingIndicator">
+            <div class="spinner"></div>
+            <p>Loading letters...</p>
+        </div>
+    </div>
+
+    <!-- Letter Card Modal (for preview) -->
+    <div id="previewModal" class="modal hidden">
+        <div class="modal-content preview-modal">
+            <div class="modal-close" onclick="closePreview()">&times;</div>
+            <div id="previewContent"></div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="readFullBtn" onclick="readFullLetter()">Read Full Letter</button>
+                <button class="btn btn-secondary" onclick="closePreview()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Kung Nasabi Ko Sana. Letters that deserve to be read.</p>
+    </footer>
+
+    <script src="browse-script.js"></script>
+</body>
+</html>
