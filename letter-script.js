@@ -8,16 +8,44 @@ document.addEventListener('DOMContentLoaded', function() {
 // ==================== LOAD LETTER DATA ==================== 
 
 function loadLetter() {
-    const letterData = sessionStorage.getItem('currentLetter');
+    // First check sessionStorage (from home page navigation)
+    let letterData = sessionStorage.getItem('currentLetter');
     
-    if (!letterData) {
-        // No letter found, redirect to home
-        window.location.href = 'index.html';
+    if (letterData) {
+        const letter = JSON.parse(letterData);
+        displayLetter(letter);
         return;
     }
     
-    const letter = JSON.parse(letterData);
-    displayLetter(letter);
+    // Otherwise, try to get from URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const letterId = params.get('id');
+    
+    if (letterId) {
+        // Fetch from data/letters.json
+        fetchLetterById(letterId);
+    } else {
+        // No letter found, redirect to home
+        window.location.href = 'index.html';
+    }
+}
+
+function fetchLetterById(letterId) {
+    fetch('data/letters.json')
+        .then(response => response.json())
+        .then(data => {
+            const letter = data.letters.find(l => l.id === letterId);
+            if (letter) {
+                displayLetter(letter);
+            } else {
+                // Letter not found
+                showNotFoundMessage();
+            }
+        })
+        .catch(error => {
+            console.error('Error loading letter:', error);
+            showErrorMessage();
+        });
 }
 
 function displayLetter(letter) {
@@ -36,8 +64,33 @@ function displayLetter(letter) {
     
     letterContent.innerHTML = letterHTML;
     
+    // Store in sessionStorage for sharing
+    sessionStorage.setItem('currentLetter', JSON.stringify(letter));
+    
     // Update page title
     document.title = `${letter.title} - Kung Nasabi Ko Sana`;
+}
+
+function showNotFoundMessage() {
+    const letterContent = document.getElementById('letterContent');
+    letterContent.innerHTML = `
+        <div style="text-align: center; padding: 60px 20px;">
+            <h1 style="color: #d4a5a5; margin-bottom: 20px;">Letter Not Found</h1>
+            <p style="color: #5c5c5c; margin-bottom: 30px;">This letter seems to have wandered away.</p>
+            <a href="index.html" style="color: #d4a5a5; text-decoration: underline;">← Return Home</a>
+        </div>
+    `;
+}
+
+function showErrorMessage() {
+    const letterContent = document.getElementById('letterContent');
+    letterContent.innerHTML = `
+        <div style="text-align: center; padding: 60px 20px;">
+            <h1 style="color: #d4a5a5; margin-bottom: 20px;">Error Loading Letter</h1>
+            <p style="color: #5c5c5c; margin-bottom: 30px;">Something went wrong while loading this letter.</p>
+            <a href="index.html" style="color: #d4a5a5; text-decoration: underline;">← Return Home</a>
+        </div>
+    `;
 }
 
 // ==================== SHARE FUNCTIONS ==================== 
@@ -57,7 +110,7 @@ function copyLetterLink() {
     if (!letterData) return;
     
     const letter = JSON.parse(letterData);
-    const letterLink = `${window.location.origin}${window.location.pathname}?letter=${letter.id}`;
+    const letterLink = `${window.location.origin}${window.location.pathname}?id=${letter.id}`;
     
     copyToClipboard(letterLink);
     showCopyStatus();
