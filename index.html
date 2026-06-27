@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kung Nasabi Ko Sana — Digital Letters</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="landing-page">
+    <!-- Background Elements -->
+    <div class="background-layer">
+        <div class="particles" id="particles"></div>
+        <div class="scattered-photos"></div>
+        <div class="vignette"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="title fade-in">KUNG NASABI KO SANA</h1>
+            <p class="tagline fade-in-delay">Some words arrive late, but still find their way home.</p>
+
+            <!-- Envelope Illustration -->
+            <div class="envelope-wrapper fade-in-delay-2">
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <div class="envelope-flap"></div>
+                        <div class="envelope-body">
+                            <div class="envelope-lines"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="floating-petals"></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons fade-in-delay-3">
+                <button class="btn btn-primary" onclick="goToAccess()">
+                    <span class="btn-text">Open Memories</span>
+                </button>
+                <button class="btn btn-secondary" onclick="goToLetterCode()">
+                    <span class="btn-text">Enter Letter Code</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Decorative Elements -->
+        <div class="decorative-items">
+            <div class="flower-item flower-1"></div>
+            <div class="flower-item flower-2"></div>
+            <div class="handwritten-note note-1">memories</div>
+            <div class="handwritten-note note-2">love</div>
+            <div class="coffee-stain stain-1"></div>
+            <div class="coffee-stain stain-2"></div>
+        </div>
+    </div>
+
+    <!-- Letter Code Modal -->
+    <div id="letterCodeModal" class="modal hidden">
+        <div class="modal-content letter-code-modal">
+            <div class="modal-close" onclick="closeModal()">&times;</div>
+            <h2>Enter Your Letter Code</h2>
+            <p class="modal-subtitle">The memory is waiting...</p>
+            
+            <div class="code-input-group">
+                <input 
+                    type="text" 
+                    id="letterCodeInput" 
+                    class="code-input" 
+                    placeholder="e.g., LOVE001"
+                    onkeypress="if(event.key === 'Enter') submitLetterCode()"
+                >
+                <button class="btn btn-primary" onclick="submitLetterCode()">
+                    <span class="btn-text">Find Letter</span>
+                </button>
+            </div>
+
+            <p class="code-error hidden" id="codeError">
+                Hmm... it seems this memory has not found its home yet.
+            </p>
+
+            <div class="code-examples">
+                <p>Example codes:</p>
+                <ul>
+                    <li>LOVE001</li>
+                    <li>MEMORY014</li>
+                    <li>NOV001</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Easter Egg Admin Access -->
+    <script>
+        // Konami code to access admin: ↑ ↑ ↓ ↓ ← → ← → B A
+        let konamiCode = [];
+        const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.key.toLowerCase());
+            konamiCode = konamiCode.slice(-10);
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiPattern)) {
+                window.location.href = 'admin.html';
+            }
+        });
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
